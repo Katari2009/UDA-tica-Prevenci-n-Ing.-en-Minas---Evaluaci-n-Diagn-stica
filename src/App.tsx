@@ -87,7 +87,8 @@ interface Question {
   text: string;
   options?: { id: string; text: string }[];
   correctAnswer?: string;
-  feedback?: string;
+  feedbackCorrect?: string;
+  feedbackIncorrect?: string;
   type: 'choice' | 'scale' | 'open';
 }
 
@@ -139,7 +140,8 @@ const QUESTIONS: Question[] = [
       { id: 'c', text: "Competencia individual" }
     ],
     correctAnswer: 'b',
-    feedback: "Correcto: La integridad y el respeto ambiental son pilares de la minería moderna y responsable."
+    feedbackCorrect: "¡Excelente! Entiendes que la minería moderna no se trata solo de extraer mineral, sino de hacerlo con una \"Licencia Social para Operar\" basada en la integridad.",
+    feedbackIncorrect: "Cuidado. Priorizar ganancias rápidas o el éxito individual ignora el impacto a largo plazo en el ecosistema y la sociedad, lo cual es éticamente insostenible en la industria actual."
   },
   {
     id: 2,
@@ -151,7 +153,8 @@ const QUESTIONS: Question[] = [
       { id: 'c', text: "Solo reportar si hay accidente" }
     ],
     correctAnswer: 'b',
-    feedback: "Correcto: La transparencia es fundamental para la licencia social para operar."
+    feedbackCorrect: "Muy bien. La transparencia es la base de la confianza. Ocultar información ambiental es una falta grave que puede destruir la reputación de un proyecto minero para siempre.",
+    feedbackIncorrect: "Ocultar o esperar a que ocurra un accidente es una postura negligente. La ética minera exige una gestión preventiva y una comunicación honesta con los grupos de interés (stakeholders)."
   },
   {
     id: 3,
@@ -163,7 +166,8 @@ const QUESTIONS: Question[] = [
       { id: 'c', text: "Éxito personal por encima de todo" }
     ],
     correctAnswer: 'b',
-    feedback: "Correcto: El bien común y la sostenibilidad aseguran el futuro de la industria y el entorno."
+    feedbackCorrect: "Correcto. La minería extrae recursos no renovables, por lo que su fundamento ético debe ser dejar un valor positivo duradero para la sociedad (sostenibilidad).",
+    feedbackIncorrect: "Maximizar solo el valor para el accionista (shareholder) es una visión del siglo pasado. Hoy, el éxito se mide por el triple balance: económico, social y ambiental."
   },
   {
     id: 4,
@@ -175,7 +179,8 @@ const QUESTIONS: Question[] = [
       { id: 'c', text: "Esperar a ver consecuencias" }
     ],
     correctAnswer: 'b',
-    feedback: "Correcto: La seguridad de los trabajadores y la integridad de la mina son prioritarias."
+    feedbackCorrect: "¡Correcto! La seguridad de los mineros en el socavón es sagrada. Documentar tu reporte te protege profesionalmente y garantiza que la empresa no ignore la advertencia.",
+    feedbackIncorrect: "Seguir órdenes que ponen en riesgo la vida humana es una violación directa del código de ética del ingeniero. La obediencia jerárquica no justifica la negligencia."
   },
   {
     id: 5,
@@ -186,7 +191,8 @@ const QUESTIONS: Question[] = [
       { id: 'b', text: "Seguridad de las comunidades" }
     ],
     correctAnswer: 'b',
-    feedback: "Correcto: La seguridad de las comunidades es un valor ético intransable."
+    feedbackCorrect: "Exacto. El impacto de una operación minera trasciende los límites del yacimiento. La seguridad de la comunidad vecina es un compromiso ético innegociable.",
+    feedbackIncorrect: "La producción nunca debe estar por encima de la vida o la salud de las personas. Un ingeniero que prioriza solo la extracción es un riesgo para la empresa y la sociedad."
   },
   {
     id: 6,
@@ -197,7 +203,8 @@ const QUESTIONS: Question[] = [
       { id: 'b', text: "Identificar dilema - Evaluar consecuencias - Decidir" }
     ],
     correctAnswer: 'b',
-    feedback: "Correcto: Identificar el dilema es el punto de partida para cualquier análisis ético."
+    feedbackCorrect: "Muy bien. Has aplicado un modelo de toma de decisiones éticas. No se puede decidir correctamente sin antes evaluar el impacto en todos los involucrados.",
+    feedbackIncorrect: "Analizar alternativas es un paso intermedio. El primer paso ético es siempre identificar el conflicto de valores que está presente en la situación."
   },
   {
     id: 7,
@@ -208,7 +215,8 @@ const QUESTIONS: Question[] = [
       { id: 'b', text: "Ignorar si no afecta producción" }
     ],
     correctAnswer: 'a',
-    feedback: "Correcto: El diálogo transparente es la única vía ética para resolver conflictos socio-ambientales."
+    feedbackCorrect: "Correcto. El respeto a los derechos de los pueblos originarios y la gestión compartida del agua son esenciales para la paz social en minería.",
+    feedbackIncorrect: "Ignorar a las comunidades indígenas es una falta de ética y un error estratégico que suele derivar en la paralización de los proyectos por vía judicial o social."
   },
   {
     id: 8,
@@ -220,17 +228,22 @@ const QUESTIONS: Question[] = [
       { id: 'c', text: "Totalmente en desacuerdo" }
     ],
     correctAnswer: 'c',
-    feedback: "Correcto: La transparencia es una obligación ética, no una opción."
+    feedbackCorrect: "¡Excelente! La transparencia con las comunidades no es una opción, es un deber ético y, en muchos casos, una obligación legal (Convenio 169 OIT).",
+    feedbackIncorrect: "Esta visión es peligrosa. La falta de transparencia es la causa principal de conflictos sociales que terminan en desastres económicos y humanos."
   },
   {
     id: 9,
     type: 'scale',
-    text: "Escala de 1 a 10: “Priorizo el cuidado del ambiente sobre el cumplimiento de plazos de producción”."
+    text: "Escala de 1 a 10: “Priorizo el cuidado del ambiente sobre el cumplimiento de plazos de producción”.",
+    feedbackCorrect: "Muy bien. Reflejas un compromiso real con la sostenibilidad. Entiendes que un plazo incumplido se recupera, pero un daño ambiental puede ser irreversible.",
+    feedbackIncorrect: "Tu respuesta sugiere que podrías ceder ante la presión productiva. En minería, la ética ambiental debe ser la guía; si sacrificas el entorno por el tiempo, estás comprometiendo el futuro de la industria."
   },
   {
     id: 10,
     type: 'open',
-    text: "¿Por qué es importante la ética en la ingeniería en minas?"
+    text: "¿Por qué es importante la ética en la ingeniería en minas?",
+    feedbackCorrect: "Excelente reflexión. Has comprendido que la ética en minería es la herramienta para transformar una actividad extractiva en un motor de desarrollo humano y ambiental.",
+    feedbackIncorrect: "Tu enfoque es puramente utilitario. La ética no es para evitar castigos, sino para garantizar que tu trabajo como ingeniero en minas sea un aporte al bien común y no una amenaza para el planeta."
   }
 ];
 
@@ -298,8 +311,8 @@ export default function App() {
       if (q.type === 'choice' && ans === q.correctAnswer) score++;
       if (q.type === 'scale' && parseInt(ans) >= 8) score++;
       if (q.type === 'open') {
-        const keywords = ["sostenibilidad", "ambiente", "comunidad", "responsabilidad", "ética", "seguridad", "futuro", "minería"];
-        if (keywords.some(word => ans?.toLowerCase().includes(word))) score++;
+        const text = String(ans || "").toLowerCase();
+        if (text.includes('sostenibilidad') || text.includes('responsabilidad social')) score++;
       }
     });
 
@@ -320,8 +333,8 @@ export default function App() {
       } else if (q.type === 'scale') {
         isCorrect = parseInt(ans) >= 8;
       } else if (q.type === 'open') {
-        const keywords = ["sostenibilidad", "ambiente", "comunidad", "responsabilidad", "ética", "seguridad", "futuro", "minería"];
-        isCorrect = keywords.some(word => ans?.toLowerCase().includes(word));
+        const text = String(ans || "").toLowerCase();
+        isCorrect = text.includes('sostenibilidad') || text.includes('responsabilidad social');
       }
 
       return {
@@ -819,25 +832,58 @@ export default function App() {
                   )}
                 </div>
 
-                {showFeedback && QUESTIONS[currentQuestion].type === 'choice' && (
+                {showFeedback && (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }} 
                     animate={{ opacity: 1, y: 0 }}
                     className={`mt-10 p-6 rounded-2xl flex gap-4 border-l-4 ${
-                      answers[QUESTIONS[currentQuestion].id] === QUESTIONS[currentQuestion].correctAnswer 
-                        ? 'bg-green-50 border-green-500 text-green-900' 
-                        : 'bg-red-50 border-red-500 text-red-900'
+                      (() => {
+                        const q = QUESTIONS[currentQuestion];
+                        const ans = answers[q.id];
+                        let isCorrect = false;
+                        if (q.type === 'choice') isCorrect = ans === q.correctAnswer;
+                        else if (q.type === 'scale') isCorrect = Number(ans) >= 8;
+                        else if (q.type === 'open') {
+                          const text = String(ans || "").toLowerCase();
+                          isCorrect = text.includes('sostenibilidad') || text.includes('responsabilidad social');
+                        }
+                        
+                        return isCorrect 
+                          ? 'bg-green-50 border-green-500 text-green-900' 
+                          : 'bg-red-50 border-red-500 text-red-900';
+                      })()
                     }`}
                   >
                     <div className="shrink-0 mt-1">
-                      {answers[QUESTIONS[currentQuestion].id] === QUESTIONS[currentQuestion].correctAnswer 
-                        ? <CheckCircle2 size={20} /> 
-                        : <AlertCircle size={20} />
-                      }
+                      {(() => {
+                        const q = QUESTIONS[currentQuestion];
+                        const ans = answers[q.id];
+                        let isCorrect = false;
+                        if (q.type === 'choice') isCorrect = ans === q.correctAnswer;
+                        else if (q.type === 'scale') isCorrect = Number(ans) >= 8;
+                        else if (q.type === 'open') {
+                          const text = String(ans || "").toLowerCase();
+                          isCorrect = text.includes('sostenibilidad') || text.includes('responsabilidad social');
+                        }
+                        return isCorrect ? <CheckCircle2 size={20} /> : <AlertCircle size={20} />;
+                      })()}
                     </div>
                     <div>
                       <p className="font-bold text-sm uppercase tracking-widest mb-1">Retroalimentación Técnica</p>
-                      <p className="text-sm leading-relaxed opacity-80">{QUESTIONS[currentQuestion].feedback}</p>
+                      <p className="text-sm leading-relaxed opacity-80">
+                        {(() => {
+                          const q = QUESTIONS[currentQuestion];
+                          const ans = answers[q.id];
+                          let isCorrect = false;
+                          if (q.type === 'choice') isCorrect = ans === q.correctAnswer;
+                          else if (q.type === 'scale') isCorrect = Number(ans) >= 8;
+                          else if (q.type === 'open') {
+                            const text = String(ans || "").toLowerCase();
+                            isCorrect = text.includes('sostenibilidad') || text.includes('responsabilidad social');
+                          }
+                          return isCorrect ? q.feedbackCorrect : q.feedbackIncorrect;
+                        })()}
+                      </p>
                     </div>
                   </motion.div>
                 )}
