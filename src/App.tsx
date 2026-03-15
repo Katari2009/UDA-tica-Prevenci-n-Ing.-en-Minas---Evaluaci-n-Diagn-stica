@@ -366,31 +366,37 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
-      {/* Navbar */}
-      <nav className="bg-slate-900 text-white p-4 sticky top-0 z-50 shadow-lg">
+    <div className="min-h-screen bg-mining-stone font-sans text-mining-dark topo-bg">
+      {/* Navbar Industrial */}
+      <nav className="bg-mining-dark text-white p-4 sticky top-0 z-50 border-b-2 border-mining-copper shadow-xl">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <HardHat className="text-amber-500" />
-            <span className="font-bold tracking-tight hidden sm:inline">UDA VALLENAR | ÉTICA PROFESIONAL</span>
-            <span className="font-bold sm:hidden">UDA ÉTICA</span>
+          <div className="flex items-center gap-3">
+            <div className="bg-mining-copper p-1.5 rounded-lg">
+              <HardHat className="text-white" size={24} />
+            </div>
+            <div>
+              <span className="font-display font-bold tracking-tight text-lg leading-none block">UDA VALLENAR</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-mining-copper font-bold">Ética en Ingeniería en Minas</span>
+            </div>
           </div>
           {student && (
-            <div className="flex items-center gap-4 text-sm">
-              <span className="opacity-70 hidden md:inline">{student.email}</span>
-              <div className="flex items-center gap-3">
+            <div className="flex items-center gap-6 text-sm">
+              <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10">
+                <User size={14} className="text-mining-copper" />
+                <span className="font-medium opacity-90">{student.name}</span>
+              </div>
+              <div className="flex items-center gap-4">
                 <button 
                   onClick={() => setStep('home')}
-                  className="hover:text-amber-500 transition-colors font-medium"
+                  className="hover:text-mining-copper transition-colors font-bold uppercase text-xs tracking-widest"
                 >
-                  Inicio
+                  Panel
                 </button>
-                <div className="w-px h-4 bg-white/20" />
                 <button 
                   onClick={handleLogout}
-                  className="flex items-center gap-1 hover:text-red-400 transition-colors font-medium"
+                  className="flex items-center gap-1.5 bg-red-500/10 text-red-400 px-3 py-1 rounded-md hover:bg-red-500 hover:text-white transition-all font-bold text-xs uppercase tracking-widest"
                 >
-                  <LogOut size={14} />
+                  <LogOut size={12} />
                   <span>Salir</span>
                 </button>
               </div>
@@ -399,90 +405,153 @@ export default function App() {
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto p-4 sm:p-6">
+      <main className="max-w-5xl mx-auto p-4 sm:p-8">
         <AnimatePresence mode="wait">
-          {/* REGISTRO */}
+          {/* REGISTRO PROFESIONAL */}
           {step === 'register' && (
             <motion.div 
               key="register"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl border border-slate-200 max-w-md mx-auto mt-8 sm:mt-12"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              className="max-w-md mx-auto mt-12"
             >
-              <div className="text-center mb-8">
-                <div className="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <User className="text-amber-600 w-8 h-8" />
+              <div className="bg-white p-8 rounded-2xl shadow-2xl border-t-4 border-mining-dark relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-4 opacity-5">
+                  <ShieldCheck size={120} />
                 </div>
-                <h2 className="text-2xl font-bold">Registro de Estudiante</h2>
-                <p className="text-slate-500 text-sm">Ingeniería en Minas</p>
-              </div>
+                
+                <div className="text-center mb-10 relative">
+                  <div className="bg-mining-stone w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 industrial-border rotate-3">
+                    <GraduationCap className="text-mining-dark w-10 h-10 -rotate-3" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-mining-dark">Acceso Académico</h2>
+                  <p className="text-slate-500 text-sm font-medium mt-1 uppercase tracking-widest">Módulo de Ética Profesional</p>
+                </div>
 
-              <form onSubmit={handleRegister} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1">Nombre Completo</label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
-                    <input 
-                      name="name" 
-                      type="text" 
-                      placeholder="Ej: Juan Pérez"
-                      className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none"
-                      required
-                    />
+                <form onSubmit={handleRegister} className="space-y-6 relative">
+                  <div className="space-y-2">
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Identificación</label>
+                    <div className="relative group">
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-mining-safety transition-colors" />
+                      <input 
+                        name="name" 
+                        type="text" 
+                        placeholder="Nombre Completo"
+                        className="w-full pl-12 pr-4 py-4 bg-mining-stone border-none rounded-xl focus:ring-2 focus:ring-mining-safety outline-none font-medium transition-all"
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">Correo Institucional</label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
-                    <input 
-                      name="email" 
-                      type="email" 
-                      placeholder="ejemplo@uda.cl"
-                      className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none"
-                      required
-                    />
+                  
+                  <div className="space-y-2">
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Credencial Digital</label>
+                    <div className="relative group">
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-mining-safety transition-colors" />
+                      <input 
+                        name="email" 
+                        type="email" 
+                        placeholder="ejemplo@uda.cl"
+                        className="w-full pl-12 pr-4 py-4 bg-mining-stone border-none rounded-xl focus:ring-2 focus:ring-mining-safety outline-none font-medium transition-all"
+                        required
+                      />
+                    </div>
                   </div>
+
+                  {error && (
+                    <motion.p 
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className="text-red-500 text-xs font-bold flex items-center gap-2 bg-red-50 p-3 rounded-lg border border-red-100"
+                    >
+                      <AlertCircle size={14}/> {error}
+                    </motion.p>
+                  )}
+
+                  <button className="btn-primary w-full py-4 text-lg shadow-lg shadow-mining-dark/20">
+                    Iniciar Sesión
+                    <ChevronRight size={20} />
+                  </button>
+                </form>
+                
+                <div className="mt-8 pt-6 border-t border-slate-100 text-center">
+                  <p className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">
+                    Universidad de Atacama | Facultad Tecnológica
+                  </p>
                 </div>
-                {error && <p className="text-red-500 text-sm flex items-center gap-1"><AlertCircle size={14}/> {error}</p>}
-                <button className="w-full bg-slate-900 text-white py-3 rounded-lg font-bold hover:bg-slate-800 transition-all shadow-md">
-                  Ingresar al Curso
-                </button>
-              </form>
+              </div>
             </motion.div>
           )}
 
-          {/* HOME */}
+          {/* HOME / DASHBOARD INDUSTRIAL */}
           {step === 'home' && (
             <motion.div 
               key="home"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="space-y-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-10"
             >
-              <section className="relative h-48 sm:h-64 rounded-3xl overflow-hidden shadow-2xl">
+              <section className="relative h-64 sm:h-80 rounded-[2rem] overflow-hidden shadow-2xl group">
                 <img 
-                  src="https://picsum.photos/seed/mining/1200/600" 
-                  className="w-full h-full object-cover brightness-50"
-                  alt="Minería"
+                  src="https://picsum.photos/seed/mining-industry/1200/800" 
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  alt="Minería Industrial"
                 />
-                <div className="absolute inset-0 flex flex-col justify-center p-6 sm:p-8 text-white">
-                  <h1 className="text-2xl sm:text-4xl font-black mb-2">ÉTICA PROFESIONAL</h1>
-                  <p className="text-amber-400 font-medium tracking-widest uppercase text-[10px] sm:text-sm">Ingeniería en Minas | UDA Vallenar</p>
+                <div className="absolute inset-0 bg-gradient-to-r from-mining-dark via-mining-dark/60 to-transparent flex flex-col justify-center p-8 sm:p-12">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <span className="inline-block px-3 py-1 bg-mining-safety text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-md mb-4">
+                      Área de Ingeniería
+                    </span>
+                    <h1 className="text-4xl sm:text-6xl font-black text-white mb-4 leading-none">
+                      ÉTICA EN <br />
+                      <span className="text-mining-copper">MINERÍA</span>
+                    </h1>
+                    <p className="text-slate-300 max-w-md text-sm sm:text-base leading-relaxed font-medium">
+                      Formando líderes íntegros para la industria extractiva del futuro. Compromiso, seguridad y sostenibilidad.
+                    </p>
+                  </motion.div>
+                </div>
+                <div className="absolute bottom-0 right-0 p-8 hidden sm:block">
+                  <div className="industrial-border p-4 rounded-xl bg-white/5 backdrop-blur-sm">
+                    <div className="flex items-center gap-3 text-white">
+                      <ShieldCheck className="text-mining-safety" size={24} />
+                      <div className="text-right">
+                        <p className="text-[10px] uppercase font-bold tracking-widest opacity-60">Estado del Módulo</p>
+                        <p className="font-display font-bold">ACTIVO 2026</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </section>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                <div 
+              <div className="grid md:grid-cols-2 gap-8">
+                <motion.div 
+                  whileHover={{ y: -5 }}
                   onClick={() => setStep('syllabus')}
-                  className="bg-white p-6 rounded-2xl shadow-md border-l-4 border-amber-500 cursor-pointer hover:shadow-lg transition-all"
+                  className="mining-card p-8 cursor-pointer group relative overflow-hidden"
                 >
-                  <BookOpen className="text-amber-600 mb-4" size={32} />
-                  <h3 className="text-xl font-bold mb-2">Programa del Curso</h3>
-                  <p className="text-slate-600 text-sm">Explora las unidades, competencias y resultados de aprendizaje de la asignatura.</p>
-                </div>
-                <div 
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-mining-stone rounded-bl-full -mr-16 -mt-16 transition-all group-hover:bg-mining-copper/10" />
+                  <div className="relative">
+                    <div className="bg-mining-stone w-14 h-14 rounded-xl flex items-center justify-center mb-6 industrial-border group-hover:border-mining-copper transition-colors">
+                      <BookOpen className="text-mining-dark group-hover:text-mining-copper transition-colors" size={28} />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3">Programa Académico</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                      Consulte las unidades de aprendizaje, bibliografía y el sistema de evaluación oficial de la asignatura.
+                    </p>
+                    <div className="flex items-center gap-2 text-mining-copper font-bold text-xs uppercase tracking-widest">
+                      <span>Ver detalles</span>
+                      <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  whileHover={{ y: -5 }}
                   onClick={() => {
                     if (!student) return setError("Error: Datos de estudiante no encontrados.");
                     const isBlocked = student.email && localStorage.getItem(`attempt_${student.email}`);
@@ -493,231 +562,256 @@ export default function App() {
                       setStep('eval');
                     }
                   }}
-                  className={`bg-white p-6 rounded-2xl shadow-md border-l-4 cursor-pointer hover:shadow-lg transition-all relative overflow-hidden ${
+                  className={`mining-card p-8 cursor-pointer group relative overflow-hidden ${
                     student?.email && localStorage.getItem(`attempt_${student.email}`) 
-                    ? 'border-slate-300 opacity-75' 
-                    : 'border-slate-900'
+                    ? 'opacity-60 grayscale' 
+                    : ''
                   }`}
                 >
-                  <ClipboardCheck className={`${student?.email && localStorage.getItem(`attempt_${student.email}`) ? 'text-slate-400' : 'text-slate-900'} mb-4`} size={32} />
-                  <h3 className="text-xl font-bold mb-2">Evaluación Diagnóstica</h3>
-                  <p className="text-slate-600 text-sm">Pon a prueba tus fundamentos éticos. (Intento único).</p>
-                  
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-mining-stone rounded-bl-full -mr-16 -mt-16 transition-all group-hover:bg-mining-safety/10" />
+                  <div className="relative">
+                    <div className="bg-mining-stone w-14 h-14 rounded-xl flex items-center justify-center mb-6 industrial-border group-hover:border-mining-safety transition-colors">
+                      <ClipboardCheck className="text-mining-dark group-hover:text-mining-safety transition-colors" size={28} />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3">Evaluación Diagnóstica</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                      Módulo de validación de competencias éticas iniciales. Requisito obligatorio para el semestre.
+                    </p>
+                    
+                    {student?.email && localStorage.getItem(`attempt_${student.email}`) ? (
+                      <div className="flex items-center gap-2 text-slate-400 font-bold text-xs uppercase tracking-widest">
+                        <CheckCircle2 size={14} />
+                        <span>Completado</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2 text-mining-safety font-bold text-xs uppercase tracking-widest">
+                        <span>Iniciar prueba</span>
+                        <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    )}
+                  </div>
+
                   <AnimatePresence>
                     {attemptBlocked && (
                       <motion.div 
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="absolute inset-0 bg-slate-900/90 flex items-center justify-center p-4 text-center"
+                        className="absolute inset-0 bg-mining-dark/95 flex items-center justify-center p-8 text-center z-10"
                       >
-                        <p className="text-white text-sm font-bold flex items-center gap-2">
-                          <AlertCircle size={16} className="text-amber-500" />
-                          Ya has realizado tu intento único.
-                        </p>
+                        <div className="space-y-4">
+                          <AlertCircle size={48} className="text-mining-safety mx-auto" />
+                          <h4 className="text-white font-bold text-xl">Acceso Restringido</h4>
+                          <p className="text-slate-400 text-sm">
+                            El sistema ha detectado un envío previo para esta credencial. Solo se permite un intento por estudiante.
+                          </p>
+                          <button 
+                            onClick={(e) => { e.stopPropagation(); setAttemptBlocked(false); }}
+                            className="text-mining-safety text-xs font-black uppercase tracking-widest pt-2"
+                          >
+                            Entendido
+                          </button>
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
-              </div>
-
-              <div className="flex justify-center">
-                <button 
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 text-slate-500 font-bold hover:text-red-600 transition-colors"
-                >
-                  <LogOut size={18} />
-                  Cerrar Sesión / Salir
-                </button>
+                </motion.div>
               </div>
             </motion.div>
           )}
 
-          {/* SYLLABUS */}
+          {/* SYLLABUS INDUSTRIAL */}
           {step === 'syllabus' && (
-            <motion.div key="syllabus" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
-              <div className="flex items-center gap-4 mb-8">
-                <button onClick={() => setStep('home')} className="p-2 hover:bg-slate-200 rounded-full"><ChevronRight className="rotate-180"/></button>
-                <h2 className="text-3xl font-bold">Programa de Asignatura</h2>
-              </div>
-
-              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                <div className="p-4 sm:p-6 bg-slate-900 text-white">
-                  <h3 className="text-base sm:text-lg font-bold">Descripción de la Asignatura</h3>
-                  <p className="text-slate-300 text-xs sm:text-sm mt-2">
-                    Proporciona principios y valores éticos para guiar el comportamiento profesional; desarrolla reflexión crítica sobre acciones considerando implicancias morales y sociales.
-                  </p>
+            <motion.div key="syllabus" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-8">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <button 
+                    onClick={() => setStep('home')} 
+                    className="w-10 h-10 flex items-center justify-center bg-white rounded-xl border border-slate-200 hover:border-mining-copper transition-colors"
+                  >
+                    <ChevronRight className="rotate-180 text-mining-dark"/>
+                  </button>
+                  <div>
+                    <h2 className="text-3xl font-bold">Programa Oficial</h2>
+                    <p className="text-slate-500 text-sm font-medium">Asignatura: Ética Profesional</p>
+                  </div>
                 </div>
-                <div className="p-4 sm:p-6 space-y-6">
-                  <div className="flex items-center gap-2 text-amber-600 font-bold border-b border-amber-100 pb-2">
-                    <Layers size={20} />
-                    <span>Unidades de Aprendizaje</span>
-                  </div>
-                  {SYLLABUS.units.map((unit, i) => (
-                    <div key={i} className="border-b border-slate-100 pb-4 last:border-0">
-                      <h4 className="font-bold text-slate-800 mb-2">{unit.title}</h4>
-                      <p className="text-slate-600 text-sm">{unit.content}</p>
-                    </div>
-                  ))}
-
-                  <div className="flex items-center gap-2 text-amber-600 font-bold border-b border-amber-100 pb-2 pt-4">
-                    <ClipboardCheck size={20} />
-                    <span>Sistema de Evaluación</span>
-                  </div>
-                  {SYLLABUS.evaluation.map((evalItem, i) => (
-                    <div key={i} className="border-b border-slate-100 pb-4 last:border-0">
-                      <h4 className="font-bold text-slate-800 mb-2">{evalItem.title}</h4>
-                      <p className="text-slate-600 text-sm">{evalItem.content}</p>
-                    </div>
-                  ))}
-
-                  <div className="flex items-center gap-2 text-amber-600 font-bold border-b border-amber-100 pb-2 pt-4">
-                    <Library size={20} />
-                    <span>Bibliografía</span>
-                  </div>
-                  <div className="space-y-4">
-                    <div>
-                      <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Obligatoria</h5>
-                      <ul className="space-y-2">
-                        {SYLLABUS.bibliography.obligatory.map((book, i) => (
-                          <li key={i} className="text-sm text-slate-600 flex gap-2">
-                            <span className="text-amber-500">•</span>
-                            {book}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Complementaria</h5>
-                      <ul className="space-y-2">
-                        {SYLLABUS.bibliography.complementary.map((book, i) => (
-                          <li key={i} className="text-sm text-slate-600 flex gap-2">
-                            <span className="text-amber-500">•</span>
-                            {book}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-amber-600 font-bold border-b border-amber-100 pb-2 pt-4">
-                    <Monitor size={20} />
-                    <span>Recursos de Aprendizaje</span>
-                  </div>
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div>
-                      <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Informáticos</h5>
-                      <ul className="space-y-2">
-                        {SYLLABUS.resources.it.map((res, i) => (
-                          <li key={i} className="text-sm text-slate-600 flex gap-2">
-                            <span className="text-amber-500">•</span>
-                            {res}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Otros Recursos</h5>
-                      <ul className="space-y-2">
-                        {SYLLABUS.resources.others.map((res, i) => (
-                          <li key={i} className="text-sm text-slate-600 flex gap-2">
-                            <span className="text-amber-500">•</span>
-                            {res}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+                <div className="hidden sm:block">
+                  <span className="px-4 py-2 bg-mining-dark text-white rounded-lg text-xs font-black uppercase tracking-widest">
+                    Código: MIN-2026
+                  </span>
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="bg-amber-50 p-4 rounded-xl border border-amber-100">
-                  <h4 className="font-bold flex items-center gap-2 mb-2"><ShieldCheck size={18}/> Competencias</h4>
-                  <ul className="text-xs space-y-2 text-slate-700">
-                    <li>• Aplica principios éticos en toma de decisiones.</li>
-                    <li>• Garantiza justicia y bien común.</li>
-                    <li>• Análisis crítico de información técnica.</li>
-                  </ul>
+              <div className="grid lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2 space-y-8">
+                  <div className="mining-card overflow-hidden">
+                    <div className="p-6 bg-mining-dark text-white flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Monitor size={20} className="text-mining-copper" />
+                        <h3 className="font-bold text-lg">Descripción General</h3>
+                      </div>
+                    </div>
+                    <div className="p-8">
+                      <p className="text-slate-600 leading-relaxed italic border-l-4 border-mining-copper pl-6">
+                        "Proporciona principios y valores éticos para guiar el comportamiento profesional; desarrolla reflexión crítica sobre acciones considerando implicancias morales y sociales en el contexto de la industria minera."
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mining-card">
+                    <div className="p-6 border-b border-slate-100 flex items-center gap-3">
+                      <Layers size={20} className="text-mining-safety" />
+                      <h3 className="font-bold text-lg uppercase tracking-tight">Unidades de Aprendizaje</h3>
+                    </div>
+                    <div className="p-8 space-y-8">
+                      {SYLLABUS.units.map((unit, i) => (
+                        <div key={i} className="group">
+                          <div className="flex items-start gap-4">
+                            <span className="text-3xl font-black text-slate-100 group-hover:text-mining-stone transition-colors leading-none">0{i+1}</span>
+                            <div>
+                              <h4 className="font-bold text-mining-dark mb-2 group-hover:text-mining-copper transition-colors">{unit.title}</h4>
+                              <p className="text-slate-500 text-sm leading-relaxed">{unit.content}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                  <h4 className="font-bold flex items-center gap-2 mb-2"><GraduationCap size={18}/> Aprendizaje</h4>
-                  <ul className="text-xs space-y-2 text-slate-700">
-                    <li>• Aplica marcos éticos en resolución de casos.</li>
-                    <li>• Explica principios en industria minera.</li>
-                    <li>• Considera impacto social y ambiental.</li>
-                  </ul>
+
+                <div className="space-y-8">
+                  <div className="mining-card">
+                    <div className="p-6 border-b border-slate-100 flex items-center gap-3">
+                      <ClipboardCheck size={20} className="text-mining-safety" />
+                      <h3 className="font-bold text-lg uppercase tracking-tight">Evaluación</h3>
+                    </div>
+                    <div className="p-6 space-y-4">
+                      {SYLLABUS.evaluation.map((evalItem, i) => (
+                        <div key={i} className="p-4 bg-mining-stone rounded-xl border border-transparent hover:border-mining-copper/20 transition-all">
+                          <h4 className="font-bold text-xs uppercase tracking-widest text-mining-dark mb-1">{evalItem.title}</h4>
+                          <p className="text-slate-500 text-[11px] leading-tight">{evalItem.content}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mining-card">
+                    <div className="p-6 border-b border-slate-100 flex items-center gap-3">
+                      <Library size={20} className="text-mining-safety" />
+                      <h3 className="font-bold text-lg uppercase tracking-tight">Bibliografía</h3>
+                    </div>
+                    <div className="p-6 space-y-6">
+                      <div>
+                        <h5 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Obligatoria</h5>
+                        <ul className="space-y-3">
+                          {SYLLABUS.bibliography.obligatory.map((book, i) => (
+                            <li key={i} className="text-[11px] text-slate-600 flex gap-2 leading-relaxed">
+                              <span className="text-mining-copper font-bold">•</span>
+                              {book}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
           )}
 
-          {/* EVALUACIÓN */}
+          {/* EVALUACIÓN INDUSTRIAL */}
           {step === 'eval' && (
-            <motion.div key="eval" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-              <div className="flex justify-between items-center mb-4 gap-4">
-                <span className="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-widest">Pregunta {currentQuestion + 1} de {QUESTIONS.length}</span>
-                <div className="w-24 sm:w-32 h-2 bg-slate-200 rounded-full overflow-hidden shrink-0">
-                  <div 
-                    className="h-full bg-amber-500 transition-all duration-500" 
-                    style={{ width: `${((currentQuestion + 1) / QUESTIONS.length) * 100}%` }}
+            <motion.div key="eval" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-3xl mx-auto space-y-8">
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-mining-dark text-white rounded-xl flex items-center justify-center font-black text-xl border-b-4 border-mining-safety">
+                    {currentQuestion + 1}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg leading-none">Pregunta en Curso</h3>
+                    <p className="text-slate-400 text-xs uppercase tracking-widest font-bold mt-1">Avance: {Math.round(((currentQuestion + 1) / QUESTIONS.length) * 100)}%</p>
+                  </div>
+                </div>
+                <div className="w-full sm:w-48 h-3 bg-slate-200 rounded-full overflow-hidden industrial-border">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${((currentQuestion + 1) / QUESTIONS.length) * 100}%` }}
+                    className="h-full bg-mining-safety" 
                   />
                 </div>
               </div>
 
-              <div className="bg-white p-5 sm:p-8 rounded-3xl shadow-xl border border-slate-200">
-                <h3 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">{QUESTIONS[currentQuestion].text}</h3>
+              <div className="mining-card p-8 sm:p-12 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+                  <HardHat size={120} />
+                </div>
+                
+                <h3 className="text-2xl sm:text-3xl font-bold mb-10 leading-tight relative">{QUESTIONS[currentQuestion].text}</h3>
 
-                <div className="space-y-3">
+                <div className="space-y-4 relative">
                   {QUESTIONS[currentQuestion].type === 'choice' && QUESTIONS[currentQuestion].options?.map((opt) => (
                     <button
                       key={opt.id}
                       disabled={showFeedback}
                       onClick={() => handleAnswer(opt.id)}
-                      className={`w-full text-left p-3 sm:p-4 rounded-xl border-2 transition-all flex justify-between items-center gap-3 ${
+                      className={`w-full text-left p-5 rounded-xl border-2 transition-all flex justify-between items-center gap-4 group ${
                         answers[QUESTIONS[currentQuestion].id] === opt.id
                           ? opt.id === QUESTIONS[currentQuestion].correctAnswer 
                             ? 'border-green-500 bg-green-50' 
                             : 'border-red-500 bg-red-50'
-                          : 'border-slate-100 hover:border-amber-200 hover:bg-amber-50'
+                          : 'border-mining-stone hover:border-mining-copper/40 hover:bg-mining-stone transition-all'
                       }`}
                     >
-                      <span className="text-sm sm:text-base">{opt.text}</span>
-                      {showFeedback && opt.id === QUESTIONS[currentQuestion].correctAnswer && <CheckCircle2 className="text-green-500" />}
+                      <div className="flex items-center gap-4">
+                        <span className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-sm transition-colors ${
+                          answers[QUESTIONS[currentQuestion].id] === opt.id ? 'bg-white' : 'bg-mining-stone group-hover:bg-white'
+                        }`}>
+                          {opt.id.toUpperCase()}
+                        </span>
+                        <span className="font-medium text-slate-700">{opt.text}</span>
+                      </div>
+                      {showFeedback && opt.id === QUESTIONS[currentQuestion].correctAnswer && <CheckCircle2 className="text-green-500 shrink-0" />}
                     </button>
                   ))}
 
                   {QUESTIONS[currentQuestion].type === 'scale' && (
-                    <div className="space-y-4">
-                      <input 
-                        type="range" min="1" max="10" 
-                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
-                        onChange={(e) => setAnswers(prev => ({ ...prev, [QUESTIONS[currentQuestion].id]: e.target.value }))}
-                      />
-                      <div className="flex justify-between text-xs font-bold text-slate-400">
-                        <span>1 - Nada de acuerdo</span>
-                        <span className="text-amber-600 text-lg">{answers[QUESTIONS[currentQuestion].id] || 5}</span>
-                        <span>10 - Totalmente de acuerdo</span>
+                    <div className="space-y-8 py-4">
+                      <div className="relative pt-6">
+                        <input 
+                          type="range" min="1" max="10" 
+                          className="w-full h-3 bg-mining-stone rounded-full appearance-none cursor-pointer accent-mining-safety border border-slate-200"
+                          onChange={(e) => setAnswers(prev => ({ ...prev, [QUESTIONS[currentQuestion].id]: e.target.value }))}
+                        />
+                        <div className="flex justify-between mt-4">
+                          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">1 - Crítico</span>
+                          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">10 - Óptimo</span>
+                        </div>
                       </div>
-                      <button 
-                        onClick={() => handleAnswer(answers[QUESTIONS[currentQuestion].id] || 5)}
-                        className="w-full bg-slate-900 text-white py-3 rounded-xl font-bold"
-                      >
-                        Confirmar Valor
-                      </button>
+                      <div className="flex items-center justify-center gap-4">
+                        <div className="w-20 h-20 rounded-2xl bg-mining-dark text-white flex items-center justify-center text-4xl font-black border-b-4 border-mining-copper">
+                          {answers[QUESTIONS[currentQuestion].id] || 5}
+                        </div>
+                        <button 
+                          onClick={() => handleAnswer(answers[QUESTIONS[currentQuestion].id] || 5)}
+                          className="btn-primary"
+                        >
+                          Confirmar Valor
+                        </button>
+                      </div>
                     </div>
                   )}
 
                   {QUESTIONS[currentQuestion].type === 'open' && (
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                       <textarea 
-                        className="w-full p-4 border border-slate-200 rounded-xl h-32 outline-none focus:ring-2 focus:ring-amber-500"
-                        placeholder="Escriba su reflexión aquí..."
+                        className="w-full p-6 bg-mining-stone border-none rounded-2xl h-48 outline-none focus:ring-2 focus:ring-mining-copper font-medium transition-all"
+                        placeholder="Desarrolle su respuesta considerando criterios técnicos y éticos..."
                         onChange={(e) => setAnswers(prev => ({ ...prev, [QUESTIONS[currentQuestion].id]: e.target.value }))}
                       />
                       <button 
                         onClick={() => handleAnswer(answers[QUESTIONS[currentQuestion].id])}
-                        className="w-full bg-slate-900 text-white py-3 rounded-xl font-bold"
+                        className="btn-primary w-full py-4"
                       >
                         Finalizar Evaluación
                       </button>
@@ -727,95 +821,124 @@ export default function App() {
 
                 {showFeedback && QUESTIONS[currentQuestion].type === 'choice' && (
                   <motion.div 
-                    initial={{ opacity: 0, height: 0 }} 
-                    animate={{ opacity: 1, height: 'auto' }}
-                    className={`mt-6 p-4 rounded-xl flex gap-3 ${
+                    initial={{ opacity: 0, y: 10 }} 
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`mt-10 p-6 rounded-2xl flex gap-4 border-l-4 ${
                       answers[QUESTIONS[currentQuestion].id] === QUESTIONS[currentQuestion].correctAnswer 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-red-100 text-red-800'
+                        ? 'bg-green-50 border-green-500 text-green-900' 
+                        : 'bg-red-50 border-red-500 text-red-900'
                     }`}
                   >
-                    <Info size={20} className="shrink-0" />
-                    <p className="text-sm">{QUESTIONS[currentQuestion].feedback}</p>
+                    <div className="shrink-0 mt-1">
+                      {answers[QUESTIONS[currentQuestion].id] === QUESTIONS[currentQuestion].correctAnswer 
+                        ? <CheckCircle2 size={20} /> 
+                        : <AlertCircle size={20} />
+                      }
+                    </div>
+                    <div>
+                      <p className="font-bold text-sm uppercase tracking-widest mb-1">Retroalimentación Técnica</p>
+                      <p className="text-sm leading-relaxed opacity-80">{QUESTIONS[currentQuestion].feedback}</p>
+                    </div>
                   </motion.div>
                 )}
 
                 {showFeedback && (
-                  <button 
+                  <motion.button 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                     onClick={nextQuestion}
-                    className="mt-8 w-full bg-amber-500 text-white py-4 rounded-xl font-bold hover:bg-amber-600 transition-all flex items-center justify-center gap-2"
+                    className="mt-10 w-full btn-primary py-5 bg-mining-copper hover:bg-mining-dark shadow-xl"
                   >
-                    {currentQuestion < QUESTIONS.length - 1 ? "Siguiente Pregunta" : "Ver Resultados"}
+                    {currentQuestion < QUESTIONS.length - 1 ? "Siguiente Pregunta" : "Generar Resultados Finales"}
                     <ChevronRight />
-                  </button>
+                  </motion.button>
                 )}
               </div>
             </motion.div>
           )}
 
-          {/* RESULTADOS */}
+          {/* RESULTADOS INDUSTRIALES */}
           {step === 'results' && results && (
-            <motion.div key="results" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6 sm:space-y-8 text-center">
-              <div className="bg-white p-6 sm:p-10 rounded-3xl shadow-2xl border border-slate-200">
-                <div className="mb-6">
-                  <div className="inline-block p-3 sm:p-4 bg-amber-100 rounded-full mb-4">
-                    <CheckCircle2 className="text-amber-600 w-10 h-10 sm:w-12 sm:h-12" />
+            <motion.div key="results" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="max-w-3xl mx-auto space-y-8">
+              <div className="mining-card p-10 sm:p-16 text-center relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-2 bg-mining-copper" />
+                
+                <div className="mb-10">
+                  <div className="inline-flex items-center justify-center w-24 h-24 bg-mining-stone rounded-3xl mb-6 industrial-border rotate-6">
+                    <CheckCircle2 className="text-mining-accent w-12 h-12 -rotate-6" />
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-black">¡Evaluación Completada!</h2>
-                  <p className="text-slate-500 text-sm">Resultados enviados a litasanchezromero@gmail.com</p>
+                  <h2 className="text-4xl font-black text-mining-dark mb-2">Evaluación Finalizada</h2>
+                  <p className="text-slate-400 font-bold text-xs uppercase tracking-[0.2em]">Reporte de Competencias Éticas v1.0</p>
                 </div>
 
-                <div className="flex justify-center gap-4 sm:gap-8 mb-8">
-                  <div className="text-center">
-                    <span className="block text-3xl sm:text-4xl font-black text-slate-900">{results.score}/10</span>
-                    <span className="text-[10px] sm:text-xs uppercase font-bold text-slate-400">Puntaje</span>
+                <div className="grid grid-cols-2 gap-8 mb-12">
+                  <div className="bg-mining-stone p-6 rounded-2xl border-b-4 border-mining-dark">
+                    <span className="block text-5xl font-black text-mining-dark">{results.score}<span className="text-xl opacity-30">/10</span></span>
+                    <span className="text-[10px] uppercase font-black tracking-widest text-slate-400 mt-2 block">Puntaje Obtenido</span>
                   </div>
-                  <div className="w-px bg-slate-100" />
-                  <div className="text-center">
-                    <span className="block text-lg sm:text-xl font-black text-amber-600 mt-1 sm:mt-2">{results.level}</span>
-                    <span className="text-[10px] sm:text-xs uppercase font-bold text-slate-400">Nivel de Logro</span>
+                  <div className="bg-mining-stone p-6 rounded-2xl border-b-4 border-mining-copper">
+                    <span className="block text-lg font-black text-mining-copper leading-tight mb-1">{results.level}</span>
+                    <span className="text-[10px] uppercase font-black tracking-widest text-slate-400 block">Nivel de Logro</span>
                   </div>
                 </div>
 
-                <div className="bg-slate-50 p-6 rounded-2xl text-left mb-8">
-                  <h4 className="font-bold mb-2 flex items-center gap-2"><ShieldCheck size={18}/> Perfil Ético Observado</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">{results.profileDescription}</p>
+                <div className="bg-mining-dark text-white p-8 rounded-2xl text-left mb-10 relative group">
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <ShieldCheck size={64} />
+                  </div>
+                  <h4 className="font-black text-xs uppercase tracking-[0.3em] text-mining-copper mb-4 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-mining-copper rounded-full animate-pulse" />
+                    Perfil Ético Profesional
+                  </h4>
+                  <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-medium">
+                    {results.profileDescription}
+                  </p>
                 </div>
 
-                <button 
-                  onClick={handleDownloadDoc}
-                  className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-2 shadow-lg"
-                >
-                  <Download size={20} />
-                  Descargar Reporte .DOCX
-                </button>
-              </div>
-
-               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button 
-                  onClick={() => setStep('home')}
-                  className="text-slate-500 font-bold hover:text-slate-800 transition-colors"
-                >
-                  Volver al Inicio
-                </button>
-                <div className="hidden sm:block w-px h-4 bg-slate-300" />
-                <button 
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 text-slate-500 font-bold hover:text-red-600 transition-colors"
-                >
-                  <LogOut size={16} />
-                  Cerrar Sesión
-                </button>
+                <div className="space-y-4">
+                  <button 
+                    onClick={handleDownloadDoc}
+                    className="btn-primary w-full py-5 text-lg shadow-2xl shadow-mining-dark/30"
+                  >
+                    <Download size={22} />
+                    Descargar Certificado Oficial (.DOCX)
+                  </button>
+                  
+                  <button 
+                    onClick={() => setStep('home')}
+                    className="btn-outline w-full py-4"
+                  >
+                    Finalizar y Volver al Panel
+                  </button>
+                </div>
+                
+                <p className="mt-10 text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                  Copia de seguridad enviada a: <span className="text-mining-dark">litasanchezromero@gmail.com</span>
+                </p>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </main>
 
-      <footer className="mt-12 p-8 text-center text-slate-400 text-xs border-t border-slate-200">
-        <p>© 2026 Universidad de Atacama - Sede Vallenar</p>
-        <p>Facultad Tecnológica | Ingeniería en Minas</p>
-        <p className="mt-2 font-medium text-slate-500">Creado por: Adriana Sánchez R., Profesora de Ética, 2026.</p>
+      <footer className="mt-20 p-12 text-center border-t border-slate-200 bg-white/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex items-center gap-3 opacity-40 grayscale">
+              <div className="w-8 h-8 bg-mining-dark rounded-lg" />
+              <div className="w-8 h-8 bg-mining-copper rounded-lg" />
+              <div className="w-8 h-8 bg-mining-safety rounded-lg" />
+            </div>
+            <div className="space-y-1">
+              <p className="text-slate-500 font-black text-[10px] uppercase tracking-[0.3em]">Universidad de Atacama - Sede Vallenar</p>
+              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Facultad Tecnológica | Ingeniería en Minas</p>
+            </div>
+            <div className="mt-6 pt-6 border-t border-slate-100 w-full max-w-xs">
+              <p className="text-slate-400 text-[10px] italic">Diseñado para la formación ética de profesionales de la minería.</p>
+              <p className="mt-2 font-bold text-slate-500 text-[10px] uppercase tracking-widest">© 2026 Profesora Adriana Sánchez R.</p>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
