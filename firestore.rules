@@ -45,7 +45,7 @@ service cloud.firestore {
              data.studentName is string && data.studentName.size() < 100 &&
              isValidEmail(data.studentEmail) &&
              data.career == "Ingeniería en Minas" &&
-             data.answers is map &&
+             data.answers is list &&
              data.timestamp is timestamp;
     }
 

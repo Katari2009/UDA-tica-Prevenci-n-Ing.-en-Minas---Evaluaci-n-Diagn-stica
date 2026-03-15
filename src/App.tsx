@@ -308,11 +308,28 @@ export default function App() {
       ? "Usted demuestra una sólida base ética, priorizando la sostenibilidad y la integridad por sobre presiones externas. Es un perfil idóneo para liderar proyectos mineros con responsabilidad social y ambiental."
       : "Usted posee conocimientos éticos fundamentales, pero debe fortalecer su capacidad de respuesta ante dilemas complejos donde la producción entra en conflicto con intereses socio-ambientales.";
 
-    const sanitizedAnswers = { ...answers };
-    QUESTIONS.forEach(q => {
-      if (sanitizedAnswers[q.id] === undefined) {
-        sanitizedAnswers[q.id] = "";
+    const detailedAnswers = QUESTIONS.map(q => {
+      const ans = answers[q.id] || "";
+      let answerText = ans;
+      let isCorrect = false;
+
+      if (q.type === 'choice') {
+        const option = q.options?.find(o => o.id === ans);
+        answerText = option ? option.text : ans;
+        isCorrect = ans === q.correctAnswer;
+      } else if (q.type === 'scale') {
+        isCorrect = parseInt(ans) >= 8;
+      } else if (q.type === 'open') {
+        const keywords = ["sostenibilidad", "ambiente", "comunidad", "responsabilidad", "ética", "seguridad", "futuro", "minería"];
+        isCorrect = keywords.some(word => ans?.toLowerCase().includes(word));
       }
+
+      return {
+        questionId: q.id,
+        questionText: q.text,
+        studentAnswer: answerText,
+        status: isCorrect ? "Correcta" : "Incorrecta/A mejorar"
+      };
     });
 
     const finalResults = { 
@@ -322,7 +339,7 @@ export default function App() {
       studentName: student.name, 
       studentEmail: student.email, 
       career: "Ingeniería en Minas",
-      answers: sanitizedAnswers, 
+      answers: detailedAnswers, 
       timestamp: serverTimestamp() 
     };
     setResults(finalResults);

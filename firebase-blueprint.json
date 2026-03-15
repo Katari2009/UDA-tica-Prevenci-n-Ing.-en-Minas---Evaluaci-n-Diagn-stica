@@ -31,8 +31,17 @@
           "description": "Carrera a la que pertenece la evaluación."
         },
         "answers": {
-          "type": "object",
-          "description": "Respuestas detalladas por ID de pregunta."
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "questionId": { "type": "integer" },
+              "questionText": { "type": "string" },
+              "studentAnswer": { "type": "string" },
+              "status": { "type": "string" }
+            }
+          },
+          "description": "Detalle de respuestas con texto y estado."
         },
         "timestamp": {
           "type": "string",
