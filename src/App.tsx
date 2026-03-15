@@ -321,6 +321,7 @@ export default function App() {
       profileDescription, 
       studentName: student.name, 
       studentEmail: student.email, 
+      career: "Ingeniería en Minas",
       answers: sanitizedAnswers, 
       timestamp: serverTimestamp() 
     };
@@ -330,11 +331,11 @@ export default function App() {
     // Bloquear intento
     try {
       console.log("Saving to Firebase Project:", db.app.options.projectId);
-      // Guardamos en la colección "evaluaciones"
-      await addDoc(collection(db, "evaluaciones"), finalResults);
+      // Guardamos en la colección "evaluaciones_minas"
+      await addDoc(collection(db, "evaluaciones_minas"), finalResults);
       console.log("Resultado guardado en la nube exitosamente");
     } catch (e) {
-      const errInfo = handleFirestoreError(e, OperationType.CREATE, "evaluaciones");
+      const errInfo = handleFirestoreError(e, OperationType.CREATE, "evaluaciones_minas");
       alert(`Error al guardar en la base de datos: ${errInfo.error}\n\nPor favor, verifique que la base de datos Firestore esté creada en modo 'Producción' o 'Prueba' y que las reglas permitan la escritura.`);
     }    
     // Simular envío de correo

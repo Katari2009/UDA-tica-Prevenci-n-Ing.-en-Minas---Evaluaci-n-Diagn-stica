@@ -37,13 +37,14 @@ service cloud.firestore {
     }
 
     function isValidEvaluacion(data) {
-      return data.keys().hasAll(['score', 'level', 'profileDescription', 'studentName', 'studentEmail', 'answers', 'timestamp']) &&
-             data.keys().hasOnly(['score', 'level', 'profileDescription', 'studentName', 'studentEmail', 'answers', 'timestamp']) &&
+      return data.keys().hasAll(['score', 'level', 'profileDescription', 'studentName', 'studentEmail', 'career', 'answers', 'timestamp']) &&
+             data.keys().hasOnly(['score', 'level', 'profileDescription', 'studentName', 'studentEmail', 'career', 'answers', 'timestamp']) &&
              data.score is number && data.score >= 0 && data.score <= 10 &&
              data.level is string && data.level.size() < 100 &&
              data.profileDescription is string && data.profileDescription.size() < 1000 &&
              data.studentName is string && data.studentName.size() < 100 &&
              isValidEmail(data.studentEmail) &&
+             data.career == "Ingeniería en Minas" &&
              data.answers is map &&
              data.timestamp is timestamp;
     }
@@ -52,10 +53,8 @@ service cloud.firestore {
     // Rules
     // ===============================================================
 
-    match /evaluaciones/{evalId} {
-      // Permite a cualquier usuario enviar su evaluación (unauthenticated is allowed for diagnostic if requested, 
-      // but here we follow the "initially restricted" principle unless specified. 
-      // The app currently doesn't use Auth for submission, so we'll allow public create but restricted read.)
+    match /evaluaciones_minas/{evalId} {
+      // Permite a cualquier usuario enviar su evaluación
       allow create: if isValidEvaluacion(request.resource.data);
       
       // Solo el admin puede ver los resultados

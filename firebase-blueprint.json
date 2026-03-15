@@ -26,6 +26,10 @@
           "format": "email",
           "description": "Correo institucional del estudiante."
         },
+        "career": {
+          "type": "string",
+          "description": "Carrera a la que pertenece la evaluación."
+        },
         "answers": {
           "type": "object",
           "description": "Respuestas detalladas por ID de pregunta."
@@ -48,9 +52,9 @@
     }
   },
   "firestore": {
-    "/evaluaciones/{evalId}": {
+    "/evaluaciones_minas/{evalId}": {
       "schema": "Evaluacion",
-      "description": "Colección de resultados de evaluaciones diagnósticas."
+      "description": "Colección de resultados de evaluaciones diagnósticas de Ingeniería en Minas."
     }
   }
 }
