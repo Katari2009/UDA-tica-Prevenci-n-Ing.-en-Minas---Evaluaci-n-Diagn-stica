@@ -329,6 +329,7 @@ export default function App() {
     
     // Bloquear intento
     try {
+      console.log("Saving to Firebase Project:", db.app.options.projectId);
       // Guardamos en la colección "evaluaciones"
       await addDoc(collection(db, "evaluaciones"), finalResults);
       console.log("Resultado guardado en la nube exitosamente");
