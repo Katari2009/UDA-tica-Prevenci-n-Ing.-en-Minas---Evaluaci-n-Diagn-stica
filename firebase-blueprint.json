@@ -1,0 +1,56 @@
+{
+  "entities": {
+    "Evaluacion": {
+      "title": "Evaluación",
+      "description": "Resultado de la evaluación diagnóstica de un estudiante.",
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "number",
+          "description": "Puntaje obtenido (0-10)."
+        },
+        "level": {
+          "type": "string",
+          "description": "Nivel de logro alcanzado."
+        },
+        "profileDescription": {
+          "type": "string",
+          "description": "Descripción del perfil ético observado."
+        },
+        "studentName": {
+          "type": "string",
+          "description": "Nombre completo del estudiante."
+        },
+        "studentEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Correo institucional del estudiante."
+        },
+        "answers": {
+          "type": "object",
+          "description": "Respuestas detalladas por ID de pregunta."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha y hora de envío."
+        }
+      },
+      "required": [
+        "score",
+        "level",
+        "profileDescription",
+        "studentName",
+        "studentEmail",
+        "answers",
+        "timestamp"
+      ]
+    }
+  },
+  "firestore": {
+    "/evaluaciones/{evalId}": {
+      "schema": "Evaluacion",
+      "description": "Colección de resultados de evaluaciones diagnósticas."
+    }
+  }
+}

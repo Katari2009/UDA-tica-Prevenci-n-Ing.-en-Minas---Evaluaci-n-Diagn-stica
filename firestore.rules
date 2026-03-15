@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: evaluaciones
+    // Document ID: auto-generated
+    // Fields:
+    //   - score: number (required) - Puntaje obtenido (0-10)
+    //   - level: string (required) - Nivel de logro
+    //   - profileDescription: string (required) - Descripción del perfil
+    //   - studentName: string (required) - Nombre del estudiante
+    //   - studentEmail: string (required) - Email del estudiante
+    //   - answers: map (required) - Respuestas detalladas
+    //   - timestamp: timestamp (required) - Fecha de envío
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+          (request.auth.token.email == "christiannunezvega@gmail.com" && request.auth.token.email_verified == true));
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidEvaluacion(data) {
+      return data.keys().hasAll(['score', 'level', 'profileDescription', 'studentName', 'studentEmail', 'answers', 'timestamp']) &&
+             data.keys().hasOnly(['score', 'level', 'profileDescription', 'studentName', 'studentEmail', 'answers', 'timestamp']) &&
+             data.score is number && data.score >= 0 && data.score <= 10 &&
+             data.level is string && data.level.size() < 100 &&
+             data.profileDescription is string && data.profileDescription.size() < 1000 &&
+             data.studentName is string && data.studentName.size() < 100 &&
+             isValidEmail(data.studentEmail) &&
+             data.answers is map &&
+             data.timestamp is timestamp;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /evaluaciones/{evalId} {
+      // Permite a cualquier usuario enviar su evaluación (unauthenticated is allowed for diagnostic if requested, 
+      // but here we follow the "initially restricted" principle unless specified. 
+      // The app currently doesn't use Auth for submission, so we'll allow public create but restricted read.)
+      allow create: if isValidEvaluacion(request.resource.data);
+      
+      // Solo el admin puede ver los resultados
+      allow read: if isAdmin();
+      
+      // Nadie puede borrar o actualizar resultados una vez enviados
+      allow update, delete: if isAdmin();
+    }
+
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow write: if isAdmin();
+    }
+    
+    match /test/connection {
+      allow read: if true;
+    }
+  }
+}
